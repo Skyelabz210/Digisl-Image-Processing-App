@@ -1,6 +1,6 @@
-# [Project name]
+# ENHANCE!
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+ENHANCE! is a local-first digital image processing workspace for guided enhancement, forensic inspection, and spectral reference review.
 
 ## Run & Operate
 
@@ -22,15 +22,22 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/digisl-image-processing/src/App.tsx` — ENHANCE! processing workspace, evidence probes, spectral reference view, and provenance ledger
+- `artifacts/digisl-image-processing/src/index.css` — application theme and responsive workspace styling
+- `artifacts/digisl-image-processing/public/reference/` — bundled CRAM-DSP and Archimedes reference images
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Image processing runs locally in the browser with Canvas APIs; uploaded evidence is not sent to a backend.
+- The first build keeps the CRAM-DSP and Archimedes concepts approachable through visual probes and reference outputs instead of exposing the research code directly.
+- Session receipts are stored in localStorage and exported as JSON so the local-first behavior is visible and auditable.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+- ENHANCE! provides entropy-guided image enhancement with adjustable threshold and strength controls.
+- Evidence Lab provides KELD-inspired, lane-comb-inspired, and quantization fingerprint probes for the loaded image.
+- Spectral Lab surfaces the supplied Archimedes reference pack without implying that a standard RGB upload contains multispectral data.
+- Provenance records local operations in an append-only session ledger.
 
 ## User preferences
 

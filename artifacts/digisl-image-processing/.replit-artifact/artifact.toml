@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "ENHANCE! — Digital Image Processing"
+description = "ENHANCE! is a browser-based digital image processing workspace combining entropy-guided enhancement, exact CRAM-DSP forensic probes, provenance receipts, and Archimedes spectral reference outputs."
+version = "1.0.0"
+id = "artifacts/digisl-image-processing"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22284
+
+[services.development]
+run = "pnpm --filter @workspace/digisl-image-processing run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/digisl-image-processing", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/digisl-image-processing/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22284"
+BASE_PATH = "/"
