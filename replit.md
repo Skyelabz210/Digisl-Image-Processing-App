@@ -9,7 +9,9 @@ ENHANCE! is a local-first digital image processing workspace for guided enhancem
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- Optional API/database packages use `DATABASE_URL`; the browser image workspace runs independently.
+- `pnpm --filter @workspace/digisl-image-processing dev` — run the image workspace (default port 5173)
+- `pnpm test` — numerical and provenance regression suite
 
 ## Stack
 
@@ -29,15 +31,15 @@ ENHANCE! is a local-first digital image processing workspace for guided enhancem
 ## Architecture decisions
 
 - Image processing runs locally in the browser with Canvas APIs; uploaded evidence is not sent to a backend.
-- The first build keeps the CRAM-DSP and Archimedes concepts approachable through visual probes and reference outputs instead of exposing the research code directly.
-- Session receipts are stored in localStorage and exported as JSON so the local-first behavior is visible and auditable.
+- CRAM-DSP STAR8, lane-comb, and block-GCD algorithms are ported into the browser worker; Spectral Lab opens the real bundled reference outputs.
+- SHA-256 version 2 receipts are verified at load/export and bind source, decoded-raster, and output identities. Legacy data is preserved; unavailable storage falls back to an identified memory session.
 
 ## Product
 
-- ENHANCE! provides entropy-guided image enhancement with adjustable threshold and strength controls.
-- Evidence Lab provides KELD-inspired, lane-comb-inspired, and quantization fingerprint probes for the loaded image.
+- ENHANCE! provides Shannon-entropy-guided image enhancement at native dimensions with adjustable threshold and strength controls.
+- Evidence Lab provides exact KELD, residue lane-comb, and block-GCD fingerprint probes for the loaded image.
 - Spectral Lab surfaces the supplied Archimedes reference pack without implying that a standard RGB upload contains multispectral data.
-- Provenance records local operations in an append-only session ledger.
+- Provenance records local operations in a verified SHA-256 session ledger. See README.md for the measurement and trust boundaries.
 
 ## User preferences
 
